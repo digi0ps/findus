@@ -1,0 +1,8 @@
+[submodule "findus-backend"]
+	path = findus-backend
+	url = git@github.com:digi0ps/findus-backend.git
+	branch = master
+[submodule "findus-frontend"]
+	path = findus-frontend
+	url = git@github.com:digi0ps/findus-frontend.git
+	branch = master
