@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   # django:
@@ -11,10 +11,18 @@ services:
 
   frontend:
     build: ./findus-frontend
-    command: npm start
     volumes:
       - ./findus-frontend:/code
-      # Workaround: https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
       - /code/node_modules
+    # Workaround: https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+    restart: always
+
+  reverse-proxy:
+    build: .
+    command: nginx -g 'daemon off;'
     ports:
-      - "3000:3000"
+      - "8000:80"
+      - "5000:5000"
+    depends_on:
+      - frontend
+    restart: always
