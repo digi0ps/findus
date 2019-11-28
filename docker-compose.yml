@@ -1,13 +1,12 @@
 version: "3.7"
 
 services:
-  # django:
-  #   build: ./findus-backend
-  #   command: bash -c "python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:8000"
-  #   volumes:
-  #     - ./findus-backend:/code
-  #   ports:
-  #     - "8000:8000"
+  backend:
+    build: ./findus-backend
+    command: bash -c "python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./findus-backend:/code
+    restart: always
 
   frontend:
     build: ./findus-frontend
@@ -25,4 +24,5 @@ services:
       - "5000:5000"
     depends_on:
       - frontend
+      - backend
     restart: always
