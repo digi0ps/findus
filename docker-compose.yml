@@ -3,7 +3,7 @@ version: "3.7"
 services:
   backend:
     build: ./findus-backend
-    command: bash -c "python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:8000"
+    command: bash -c /code/start.sh
     volumes:
       - ./findus-backend:/code
     restart: always
@@ -22,6 +22,8 @@ services:
     ports:
       - "8000:80"
       - "5000:5000"
+    volumes:
+      - ./findus-backend/static:/opt/app/static
     depends_on:
       - frontend
       - backend
